@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
-
+import javax.swing.ImageIcon;
 /**
  *
  * @author PDaniel
@@ -26,78 +26,89 @@ public class Menu extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jPanel1 = new javax.swing.JPanel();
-        CadastroFuncionarios = new javax.swing.JButton();
-        CadastroProdutos = new javax.swing.JButton();
-        RelatoriosGerais = new javax.swing.JButton();
+        jPanel2 = new javax.swing.JPanel();
+        CadastroFuncionarios1 = new javax.swing.JButton();
+        CadastroProdutos1 = new javax.swing.JButton();
+        RelatoriosGerais1 = new javax.swing.JButton();
+        layoutTop1 = new Model.LayoutTop();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
         setForeground(new java.awt.Color(153, 153, 153));
         setIconImages(null);
-        getContentPane().setLayout(new java.awt.CardLayout());
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(153, 153, 153));
-        jButton1.setText("Cadastro Funcionarios");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(jButton1, "card2");
+        jPanel2.setMaximumSize(new java.awt.Dimension(300, 300));
+        jPanel2.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        CadastroFuncionarios.setText("Cadastro de Funcionarios");
-        CadastroFuncionarios.setPreferredSize(new java.awt.Dimension(75, 22));
-        CadastroFuncionarios.addActionListener(new java.awt.event.ActionListener() {
+        CadastroFuncionarios1.setText("Cadastro de Funcionarios");
+        CadastroFuncionarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                CadastroFuncionariosActionPerformed(evt);
+                CadastroFuncionarios1ActionPerformed(evt);
             }
         });
 
-        CadastroProdutos.setText("Cadastro de Produtos");
-        CadastroProdutos.setMaximumSize(new java.awt.Dimension(148, 22));
-        CadastroProdutos.setMinimumSize(new java.awt.Dimension(148, 22));
+        CadastroProdutos1.setText("Cadastro de Produtos");
+        CadastroProdutos1.setMaximumSize(new java.awt.Dimension(164, 22));
+        CadastroProdutos1.setMinimumSize(new java.awt.Dimension(164, 22));
+        CadastroProdutos1.setPreferredSize(new java.awt.Dimension(164, 22));
 
-        RelatoriosGerais.setText("Relatorios Gerais");
+        RelatoriosGerais1.setText("Relatorios Gerais");
+        RelatoriosGerais1.setMaximumSize(new java.awt.Dimension(164, 22));
+        RelatoriosGerais1.setMinimumSize(new java.awt.Dimension(164, 22));
+        RelatoriosGerais1.setPreferredSize(new java.awt.Dimension(164, 22));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(RelatoriosGerais, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(CadastroFuncionarios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(CadastroProdutos, javax.swing.GroupLayout.DEFAULT_SIZE, 165, Short.MAX_VALUE)))
-                .addContainerGap(284, Short.MAX_VALUE))
+        layoutTop1.setImg(new ImageIcon("src\\main\\java\\Image\\Bahamas-Mix.jpg"));
+
+        javax.swing.GroupLayout layoutTop1Layout = new javax.swing.GroupLayout(layoutTop1);
+        layoutTop1.setLayout(layoutTop1Layout);
+        layoutTop1Layout.setHorizontalGroup(
+            layoutTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 315, Short.MAX_VALUE)
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(25, 25, 25)
-                .addComponent(CadastroFuncionarios, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(CadastroProdutos, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(RelatoriosGerais, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(161, Short.MAX_VALUE))
+        layoutTop1Layout.setVerticalGroup(
+            layoutTop1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        getContentPane().add(jPanel1, "card3");
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(171, 171, 171)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(CadastroFuncionarios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(RelatoriosGerais1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(CadastroProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(104, 104, 104)
+                        .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(121, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CadastroFuncionarios1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(CadastroProdutos1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(RelatoriosGerais1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(116, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 540, 300));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void CadastroFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionarios1ActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void CadastroFuncionariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionariosActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_CadastroFuncionariosActionPerformed
+    }//GEN-LAST:event_CadastroFuncionarios1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,10 +146,10 @@ public class Menu extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton CadastroFuncionarios;
-    private javax.swing.JButton CadastroProdutos;
-    private javax.swing.JButton RelatoriosGerais;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JButton CadastroFuncionarios1;
+    private javax.swing.JButton CadastroProdutos1;
+    private javax.swing.JButton RelatoriosGerais1;
+    private javax.swing.JPanel jPanel2;
+    private Model.LayoutTop layoutTop1;
     // End of variables declaration//GEN-END:variables
 }

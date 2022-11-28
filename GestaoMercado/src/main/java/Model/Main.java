@@ -5,6 +5,8 @@
 
 package Model;
 
+import View.Menu;
+
 /**
  *
  * @author PDaniel
@@ -13,5 +15,7 @@ public class Main {
 
     public static void main(String[] args) {
         System.out.println("Hello World!");
+        Menu telaMenu = new Menu();
+        telaMenu.setVisible(true);//Funçao padrao para ativar a tela
     }
 }
