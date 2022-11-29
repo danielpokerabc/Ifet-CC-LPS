@@ -58,6 +58,7 @@ public class Menu extends javax.swing.JFrame {
         RelatoriosGerais1.setMinimumSize(new java.awt.Dimension(164, 22));
         RelatoriosGerais1.setPreferredSize(new java.awt.Dimension(164, 22));
 
+        layoutTop1.setBackground(new java.awt.Color(102, 0, 102));
         layoutTop1.setImg(new ImageIcon("src\\main\\java\\Image\\Bahamas-Mix.jpg"));
 
         javax.swing.GroupLayout layoutTop1Layout = new javax.swing.GroupLayout(layoutTop1);
