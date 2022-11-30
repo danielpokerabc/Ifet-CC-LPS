@@ -7,15 +7,11 @@ package Model;
 
 import View.Menu;
 
-/**
- *
- * @author PDaniel
- */
 public class Main {
 
     public static void main(String[] args) {
         
         Menu telaMenu = new Menu();
-        telaMenu.setVisible(true);//FunÃ§ao padrao para ativar a tela
+        telaMenu.setVisible(true);//Funçao padrao para ativar a tela
     }
 }
