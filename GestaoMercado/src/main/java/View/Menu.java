@@ -40,17 +40,22 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.setMaximumSize(new java.awt.Dimension(300, 300));
         jPanel2.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        CadastroFuncionarios1.setText("Cadastro de Funcionarios");
+        CadastroFuncionarios1.setText("Gerenciamento de Funcionarios");
         CadastroFuncionarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CadastroFuncionarios1ActionPerformed(evt);
             }
         });
 
-        CadastroProdutos1.setText("Cadastro de Produtos");
+        CadastroProdutos1.setText("Gerenciamento de Produtos");
         CadastroProdutos1.setMaximumSize(new java.awt.Dimension(164, 22));
         CadastroProdutos1.setMinimumSize(new java.awt.Dimension(164, 22));
         CadastroProdutos1.setPreferredSize(new java.awt.Dimension(164, 22));
+        CadastroProdutos1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CadastroProdutos1ActionPerformed(evt);
+            }
+        });
 
         RelatoriosGerais1.setText("Relatorios Gerais");
         RelatoriosGerais1.setMaximumSize(new java.awt.Dimension(164, 22));
@@ -108,7 +113,13 @@ public class Menu extends javax.swing.JFrame {
 
     private void CadastroFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionarios1ActionPerformed
         // TODO add your handling code here:
+        GerenciamentoFuncionarios telaCRUD = new GerenciamentoFuncionarios();
+        telaCRUD.setVisible(true);//Fun�ao padrao para ativar a tela
     }//GEN-LAST:event_CadastroFuncionarios1ActionPerformed
+
+    private void CadastroProdutos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroProdutos1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_CadastroProdutos1ActionPerformed
 
     /**
      * @param args the command line arguments
