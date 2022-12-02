@@ -87,7 +87,7 @@
       <SubComponents>
         <Component class="javax.swing.JButton" name="CadastroFuncionarios1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Gerenciamento de Funcionarios"/>
+            <Property name="text" type="java.lang.String" value="Gerenciamento de Gerentes"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="CadastroFuncionarios1ActionPerformed"/>

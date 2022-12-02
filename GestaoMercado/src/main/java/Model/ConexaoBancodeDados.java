@@ -7,76 +7,69 @@ package Model;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
+
 /**
  *
  * @author PDaniel
  */
 public class ConexaoBancodeDados {
     private Connection conexao = null;
-    /**
-     * Conecta a um banco de dados (cria o banco se ele não existir)
-     *
-     * @return
-     */
-    public boolean conectar() {
-
+    
+    private static final String Drive = "com.mysql.jdbc.Driver";
+    private static final String URL = "jdbc:mysql://localhost:3306/dbloja";
+    private static final String USER = "root";
+    private static final String PASS = "";
+    
+    public static Connection getConnection(){
         try {
-            String url = "jdbc:sqlite:src/main/java/Image/GestaoMercado.db";
-
-            this.conexao = DriverManager.getConnection(url);
-            System.out.println("Conectado");
-
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-            return false;
+            Class.forName(Drive);
+            return DriverManager.getConnection(URL,USER,PASS);
+        } catch (ClassNotFoundException ex) {
+            throw new RuntimeException("Erro na Conexao", ex);
+        } catch (SQLException ex) {
+            throw new RuntimeException("Erro na Conexao", ex);
         }
-
-        return true;
+        
+        
     }
     
-    public boolean desconectar() {
-
-        try {
-            if (this.conexao.isClosed() == false) {
-                this.conexao.close();
+    public static void closeConnection (Connection connects){
+        //Para verificar a Conexao
+        if(connects != null){
+            try {
+                connects.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro na Conexao", ex);
             }
-            System.out.println("desconectado");
-        } catch (SQLException e) {
-
-            System.err.println(e.getMessage());
-            return false;
         }
-        return true;
+        
+        
     }
-    /**
-     * Para Sql serem executado ou criar as tabelas
-     * @return 
-     */
-    public Statement criarStatement(){
-        try{
-            return this.conexao.createStatement();
+    public static void closeConnection (Connection connects, PreparedStatement stmt){
+        //Para verificar a Conexao
+        if(stmt != null){
+            try {
+                stmt.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro na Conexao", ex);
+            }
         }
-        catch(SQLException e){
-            return null;
+        closeConnection(connects);
+        
+    }
+    public static void closeConnection (Connection connects, PreparedStatement stmt, ResultSet e){
+        //Para verificar a Conexao
+        if(e != null){
+            try {
+                e.close();
+            } catch (SQLException ex) {
+                throw new RuntimeException("Erro na Conexao", ex);
+            }
         }
+        closeConnection(connects, stmt);
+        
     }
     
-    /**
-     * Para Sql serem executado ou criar as tabelas
-     * @param sql
-     * @return 
-     */
-    public PreparedStatement criarPersonalisadaStatement(String sql){
-        try{
-            return this.conexao.prepareStatement(sql);
-        }
-        catch(SQLException e){
-            return null;
-        }
-    }
-    public Connection getConexao(){
-        return this.conexao;
-    }
 }

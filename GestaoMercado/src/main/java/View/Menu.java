@@ -40,7 +40,7 @@ public class Menu extends javax.swing.JFrame {
         jPanel2.setMaximumSize(new java.awt.Dimension(300, 300));
         jPanel2.setMinimumSize(new java.awt.Dimension(300, 300));
 
-        CadastroFuncionarios1.setText("Gerenciamento de Funcionarios");
+        CadastroFuncionarios1.setText("Gerenciamento de Gerentes");
         CadastroFuncionarios1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 CadastroFuncionarios1ActionPerformed(evt);

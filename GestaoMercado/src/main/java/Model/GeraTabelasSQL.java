@@ -12,7 +12,7 @@ import java.sql.Statement;
  * @author PDaniel
  */
 public class GeraTabelasSQL {
-    private ConexaoBancodeDados conexaoDados;
+    private ConexaoBancodeDados conexaoDados=null;
     
     public void GeraTabelasSQL(ConexaoBancodeDados BancodeDados){
         this.conexaoDados= BancodeDados;
@@ -33,9 +33,9 @@ public class GeraTabelasSQL {
         boolean conectou = false;
         
         try{
-            conectou = this.conexaoDados.conectar();
+            conexaoDados = (ConexaoBancodeDados) ConexaoBancodeDados.getConnection();
             
-            Statement stmt = this.conexaoDados.criarStatement();
+            Statement stmt = (Statement) this.conexaoDados.getConnection();
             stmt.execute(sql);
             System.err.println("A Tabela Funcionario Criada ou Atualizada");
         }catch(SQLException e){
