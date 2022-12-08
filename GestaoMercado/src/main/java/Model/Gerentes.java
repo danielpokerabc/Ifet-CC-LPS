@@ -4,6 +4,7 @@
  */
 package Model;
 
+import BasedeDados.DadosFormulario;
 import View.GerenciamentoFuncionarios;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -15,6 +16,10 @@ import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Data;
@@ -26,18 +31,54 @@ import lombok.Setter;
  * @author PDaniel
  */
 
-public class Funcionarios extends Pessoa{
-
+public class Gerentes extends Pessoa{
     
-    
-    
+    Connection con=null;
+    ResultSet rs=null;
+    PreparedStatement pat=null;
+    /*
+    public void GeraTabela(){
+        
+        try{
+            String sql = "CREATE TABLE IF NOT EXISTS Gerentes"
+                +"("
+                +"id integer PRIMARY KEY AUTOINCREMENT,"
+                +"nome text NOT NULL,"
+                +"cpf text,"
+                +"email text,"
+                +"telefone text,"
+                +"contaBanco text"
+                +") VALUES(?????);";
+            
+            pat = con.prepareStatement(sql);
+            
+            pat.setString(1, Gerentes.Data[0][0]);
+            pat.setString(2, Gerentes.Data[0][1]);
+            pat.setString(3, Gerentes.Data[0][2]);
+            pat.setString(4, Gerentes.Data[0][3]);
+            
+            pat.execute();
+            
+            
+        }catch(SQLException e){
+            //Erro
+            System.err.println("ErroConexao"+e);
+        }finally{
+            /*if(conectou){//fechando a conexao se tiver aberta
+                //this.conexaoDados.desconectar();
+            
+        }
+        //return 0;
+    }
+    }*/
     
     @Getter@Setter
     public static String[][] Data;// = new String[8][8];
     
     
-    public Funcionarios(Integer id,String Nome, String Email,String Telefone,String Cpf,String ContaBanco) {
+    public Gerentes(Integer id,String Nome, String Email,String Telefone,String Cpf,String ContaBanco) {
         super(id,Nome,Email,Telefone,Cpf,ContaBanco);
+        
     }
     public String funcion;
     public static void salva(){
@@ -67,7 +108,7 @@ public class Funcionarios extends Pessoa{
         try {
             FileReader arq = new FileReader("Funcionario.txt");
             BufferedReader lerArq = new BufferedReader(arq);
-            //Funcionarios funcion = new Funcionarios();
+            //Funcionarios funcion = new Gerentes();
             
             try {
                 Path file = Paths.get("Funcionario.txt");
@@ -77,7 +118,7 @@ public class Funcionarios extends Pessoa{
                 Data = new String[(int)count][7];
 
             } catch (Exception ex) {
-                Logger.getLogger(Funcionarios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Gerentes.class.getName()).log(Level.SEVERE, null, ex);
             }
             
             String linha="";
@@ -109,13 +150,15 @@ public class Funcionarios extends Pessoa{
                 }
                 //System.out.print(Data);
             } catch (IOException ex ) {
-                Logger.getLogger(Funcionarios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Gerentes.class.getName()).log(Level.SEVERE, null, ex);
             }catch (ArrayIndexOutOfBoundsException ex ) {
-                Logger.getLogger(Funcionarios.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(Gerentes.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         } catch (FileNotFoundException ex) {
-            Logger.getLogger(Funcionarios.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(Gerentes.class.getName()).log(Level.SEVERE, null, ex);
+        }finally{
+            DadosFormulario.GeraTabela();
         }
         
     }

@@ -4,7 +4,7 @@
  */
 package View;
 
-import Model.Funcionarios;
+import Model.Gerentes;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -24,7 +24,8 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
      */
     public GerenciamentoFuncionarios() {
         initComponents();
-        Funcionarios.Leitura();
+        habilitarDesabilitaCampos(false);
+        Gerentes.Leitura();
         Jtable();
     }
 
@@ -250,26 +251,27 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
         String Titulo[] ={"Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
         String data[][] = {{"nome","@"},{"nome1","@1"}};
         
-        DefaultTableModel model = new DefaultTableModel(Funcionarios.Data,Titulo);
+        DefaultTableModel model = new DefaultTableModel(Gerentes.Data,Titulo);
         jTable1.setModel(model);
     }
     private void BotaoSalvaOUConfirma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvaOUConfirma
         // TODO add your handling code here:
         
         if((!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
-            //Funcionarios funcion = new Funcionarios(0,"","","","","");
+            //Funcionarios funcion = new Gerentes(0,"","","","","");
         
-            Funcionarios.setId(1);
-            Funcionarios.setNome(TextNome.getText());
-            Funcionarios.setCpf(jTextCPF.getText());
-            Funcionarios.setEmail(jTextEmail.getText());
-            Funcionarios.setTelefone(jTextTelefone.getText());
-            Funcionarios.setContaBanco(jTextContaBanco.getText());
+            Gerentes.setId(1);
+            Gerentes.setNome(TextNome.getText());
+            Gerentes.setCpf(jTextCPF.getText());
+            Gerentes.setEmail(jTextEmail.getText());
+            Gerentes.setTelefone(jTextTelefone.getText());
+            Gerentes.setContaBanco(jTextContaBanco.getText());
 
-            Funcionarios.salva();
-            Funcionarios.Leitura();
+            Gerentes.salva();
+            Gerentes.Leitura();
             Jtable();
             limparCampos();
+            habilitarDesabilitaCampos(false);
         }else{
             jDialog dialog = new jDialog();
             dialog.setVisible(true);
@@ -280,8 +282,16 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        habilitarDesabilitaCampos(true);
     }//GEN-LAST:event_jButton5ActionPerformed
-
+    public void habilitarDesabilitaCampos(boolean flag) {
+        TextNome.setEnabled(flag);
+        jTextCPF.setEnabled(flag);
+        jTextEmail.setEnabled(flag);
+        jTextTelefone.setEnabled(flag);
+        jTextContaBanco.setEnabled(flag);
+        
+    }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton6ActionPerformed

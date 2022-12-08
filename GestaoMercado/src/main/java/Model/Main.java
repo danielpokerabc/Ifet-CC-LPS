@@ -7,32 +7,25 @@ package Model;
 
 import ModelDAO.CategoriaDAO;
 import View.Menu;
-import java.io.IOException;
-import org.junit.Test;
-import static org.junit.Assert.*;
+import View.ViewLogin;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Statement;
 import lombok.Getter;
 import lombok.Setter;
 
 public class Main {
-    private boolean Saveresultaso=false;
-    CategoriaDAO catDAO = new CategoriaDAO();
-    //Funcionarios funcion = new Funcionarios();
-    PreparedStatement pStatement = null;
-    
-    @Getter@Setter
-    public static int ativaSaveBD=0;
     
     public static void main(String[] args) {
         
-            
-        Menu telaMenu = new Menu();
-        telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
+        ViewLogin viewLogin = new ViewLogin();
+        viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
+        //Menu telaMenu = new Menu();
+        //telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
         /*
         Funcionarios funcion = new Funcionarios(0,"","","","","");
         funcion.setId(1);
@@ -43,17 +36,7 @@ public class Main {
         funcion.setContaBanco("32999999999");
         funcion.Leitura();
         
-        /*
-        try {
-            
-            //Funcionarios.Salva();
-            
-            //boolean b;
-            //CategoriaDAO.savee();
-            //System.out.println("SQL:"+b);
-
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        */
+        
     }
 }

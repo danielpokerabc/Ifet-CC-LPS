@@ -3,10 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package ModelDAO;
-
-import Model.ConexaoBancodeDados;
-import Model.Funcionarios;
-import Model.GeraTabelasSQL;
+import Model.Gerentes;
 import Model.Main;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -27,15 +24,10 @@ public @Data class CategoriaDAO {
     static PreparedStatement pStatement=null;
     //conexao = null;
     
-    static ConexaoBancodeDados conexaoDados = new ConexaoBancodeDados();
-    GeraTabelasSQL geraTabelas = new GeraTabelasSQL();
     
     
     
-    public CategoriaDAO(){
-        conexao = ConexaoBancodeDados.getConnection();
     
-    }
     public static boolean a(){
         //savee();
         return true;
@@ -55,12 +47,12 @@ public @Data class CategoriaDAO {
         
         try{
             pStatement = conexao.prepareStatement(sqlInsert);
-            pStatement.setInt(1, Funcionarios.getId());
-            pStatement.setString(2, Funcionarios.getNome());
-            pStatement.setString(3, Funcionarios.getCpf());
-            pStatement.setString(4, Funcionarios.getEmail());
-            pStatement.setString(5, Funcionarios.getTelefone());
-            pStatement.setString(6, Funcionarios.getContaBanco());
+            pStatement.setInt(1, Gerentes.getId());
+            pStatement.setString(2, Gerentes.getNome());
+            pStatement.setString(3, Gerentes.getCpf());
+            pStatement.setString(4, Gerentes.getEmail());
+            pStatement.setString(5, Gerentes.getTelefone());
+            pStatement.setString(6, Gerentes.getContaBanco());
             pStatement.executeUpdate();
             System.out.println("Os dados foram iseridos no SQL");
             
@@ -77,7 +69,6 @@ public @Data class CategoriaDAO {
                     Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            conexaoDados.closeConnection(conexao,pStatement);
         }
         
     }

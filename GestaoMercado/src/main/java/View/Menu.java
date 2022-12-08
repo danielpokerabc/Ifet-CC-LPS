@@ -118,7 +118,9 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_CadastroFuncionarios1ActionPerformed
 
     private void CadastroProdutos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroProdutos1ActionPerformed
-        // TODO add your handling code here:
+        
+        GerenciamentoProdutos telaProdutos = new GerenciamentoProdutos();
+        telaProdutos.setVisible(true);//Fun�ao padrao para ativar a tela
     }//GEN-LAST:event_CadastroProdutos1ActionPerformed
 
     /**

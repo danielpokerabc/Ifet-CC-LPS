@@ -4,7 +4,7 @@
  */
 package Controller;
 
-import Model.Funcionarios;
+import Model.Gerentes;
 import java.util.ArrayList;
 
 /**
@@ -12,5 +12,5 @@ import java.util.ArrayList;
  * @author PDaniel
  */
 public class ControllerFuncionarios {
-    ArrayList<Funcionarios> funcionario = new ArrayList<>();
+    ArrayList<Gerentes> funcionario = new ArrayList<>();
 }
