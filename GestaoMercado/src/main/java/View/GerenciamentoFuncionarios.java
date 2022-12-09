@@ -4,6 +4,7 @@
  */
 package View;
 
+import BasedeDados.DadosFormulario;
 import Model.Gerentes;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -25,7 +26,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     public GerenciamentoFuncionarios() {
         initComponents();
         habilitarDesabilitaCampos(false);
-        Gerentes.Leitura();
+        DadosFormulario.LerTabelaGerentes();
         Jtable();
     }
 
@@ -54,7 +55,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextContaBanco = new javax.swing.JTextField();
         jButton2SalvaConfirmado = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
@@ -109,8 +109,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Cancelar");
-
         jButton5.setText("Novo");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -157,7 +155,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                                     .addGroup(layout.createSequentialGroup()
                                         .addComponent(jLabel1)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextNome, javax.swing.GroupLayout.PREFERRED_SIZE, 378, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addComponent(TextNome))
                                     .addGroup(layout.createSequentialGroup()
                                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
@@ -169,15 +167,15 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                                 .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addGroup(layout.createSequentialGroup()
                                                 .addComponent(jLabel6)
                                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextContaBanco))))))
+                                                .addComponent(jTextContaBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                                            .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel4)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextEmail))))))
                             .addGroup(layout.createSequentialGroup()
                                 .addContainerGap()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,12 +186,8 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2SalvaConfirmado)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 495, Short.MAX_VALUE))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +218,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                         .addComponent(jButton2SalvaConfirmado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton4)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         pack();
@@ -248,10 +240,9 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     }
     
     public void Jtable(){
-        String Titulo[] ={"Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
-        String data[][] = {{"nome","@"},{"nome1","@1"}};
+        String Titulo[] ={"id","Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
         
-        DefaultTableModel model = new DefaultTableModel(Gerentes.Data,Titulo);
+        DefaultTableModel model = new DefaultTableModel(DadosFormulario.DataGerente,Titulo);
         jTable1.setModel(model);
     }
     private void BotaoSalvaOUConfirma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvaOUConfirma
@@ -260,15 +251,15 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
         if((!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
             //Funcionarios funcion = new Gerentes(0,"","","","","");
         
-            Gerentes.setId(1);
+            //Gerentes.setId(1);
             Gerentes.setNome(TextNome.getText());
             Gerentes.setCpf(jTextCPF.getText());
             Gerentes.setEmail(jTextEmail.getText());
             Gerentes.setTelefone(jTextTelefone.getText());
             Gerentes.setContaBanco(jTextContaBanco.getText());
 
-            Gerentes.salva();
-            Gerentes.Leitura();
+            DadosFormulario.GeraTabela();
+            DadosFormulario.LerTabelaGerentes();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
@@ -341,7 +332,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2SalvaConfirmado;
     private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;

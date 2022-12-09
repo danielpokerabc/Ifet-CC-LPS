@@ -26,17 +26,7 @@ public class Main {
         viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
         //Menu telaMenu = new Menu();
         //telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
-        /*
-        Funcionarios funcion = new Funcionarios(0,"","","","","");
-        funcion.setId(1);
-        funcion.setNome("Daniel");
-        funcion.setCpf("12918291912");
-        funcion.setEmail("Daniel@Gmail.com");
-        funcion.setTelefone("32999999999");
-        funcion.setContaBanco("32999999999");
-        funcion.Leitura();
         
-        */
         
     }
 }

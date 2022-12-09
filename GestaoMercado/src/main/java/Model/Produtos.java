@@ -17,17 +17,6 @@ public class Produtos {
     @Getter@Setter
     public static String CodBarras;
     @Getter@Setter
-    public static String DataVencimento;
-    @Getter@Setter
-    public static String[][] DataProduto = new String[8][8];
+    public static String DataVencimento;  
     
-    public static void cadastroProduto(){
-        
-        DataProduto[0][0] = getNome()+"";
-        DataProduto[0][1] = getCodBarras()+"";
-        DataProduto[0][2] = getDataVencimento()+"";
-        
-        System.out.println(DataProduto[0][0]+DataProduto[0][1]+DataProduto[0][2]);
-        
-    }
 }
