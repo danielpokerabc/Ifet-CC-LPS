@@ -62,6 +62,15 @@ public class DadosFormulario {
         }catch(Exception e){
             JOptionPane.showConfirmDialog(null, ""+e);
             System.out.println("Sem Login no Base de Dados!!!!");
+        }finally {
+          try {
+            if(con != null){
+              con.close();
+            }
+          } catch(SQLException e) {
+            // Falhou também para fechar o arquivo
+            System.err.println(e.getMessage());
+          }
         }
     }
     public static void GeraTabela(){

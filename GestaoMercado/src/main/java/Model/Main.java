@@ -5,18 +5,8 @@
 
 package Model;
 
-import ModelDAO.CategoriaDAO;
 import View.Menu;
 import View.ViewLogin;
-
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import lombok.Getter;
-import lombok.Setter;
 
 public class Main {
     

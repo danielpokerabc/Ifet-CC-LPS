@@ -5,13 +5,6 @@
 package View;
 
 import static BasedeDados.DadosFormulario.VerificaLogin;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import javax.swing.JOptionPane;
-
 
 /**
  *
@@ -103,9 +96,6 @@ public class ViewLogin extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    static Connection con=null;
-    static ResultSet rs=null;
-    static PreparedStatement pat=null;
     
     public void Logar(){
         

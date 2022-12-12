@@ -11,8 +11,6 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  *CRUD//Creat Read Update Delete
