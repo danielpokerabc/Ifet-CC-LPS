@@ -7,7 +7,9 @@ package BasedeDados;
 import Model.Gerentes;
 import Model.Main;
 import Model.Produtos;
+import View.GerenciamentoFuncionarios;
 import View.Menu;
+import View.ViewLogin;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -23,7 +25,7 @@ import lombok.Setter;
  *
  * @author PDaniel
  */
-public class DadosFormulario {
+public class GerenciadorBD {
     static Connection con=null;
     static ResultSet rs=null;
     static PreparedStatement pat=null;
@@ -33,6 +35,8 @@ public class DadosFormulario {
     public static String[][] DataGerente;
     @Getter@Setter
     private static int LinhasCounts;
+    @Getter@Setter
+    public static int LoginConfirm=0;
     
     public static void VerificaLogin(String login, String senha){
         String sql="select * from Gerentes where login=? and senha=?";//vai procurar em todo BD na coluna login and senha
@@ -51,12 +55,14 @@ public class DadosFormulario {
             ResultSet rs = pat.executeQuery();
             
             if(rs.next()){
+                
+                LoginConfirm=1;
+                JOptionPane.showMessageDialog(null, "Login Realizado!!!!");
+                Menu.ParaMudarNomeBotao();
                 System.out.println("Login Sucesso!!!!");
-                Menu telaMenu = new Menu();
-                telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
             }else{
                 System.out.println("Login Falieds!!!!");
-                JOptionPane.showConfirmDialog(null, "Usuario e/ou Senha Invalida!");
+                JOptionPane.showMessageDialog(null, "Usuario e/ou Senha Invalida!");
             }
             
         }catch(Exception e){
@@ -73,7 +79,7 @@ public class DadosFormulario {
           }
         }
     }
-    public static void GeraTabela(){
+    public static void AdicionaGerente(){
         
         PreparedStatement pat=null;
         Connection connection = null;
@@ -125,7 +131,7 @@ public class DadosFormulario {
     }
     
     
-public static void GeraTabelaProdutos(){
+public static void AdicionaProdutos(){
         
         PreparedStatement pat=null;
         Connection connection = null;
@@ -153,11 +159,12 @@ public static void GeraTabelaProdutos(){
                       +getLinhasCounts()+", ' "
                       +Produtos.getNome()+"' , '"
                       +Produtos.getCodBarras()+"' , '"
-                      +Produtos.getDataVencimento()
+                      +Produtos.getDataVencimento()+"' , '"
+                      +Produtos.getPreco()
 
                       +"' )");
             
-            DataProduto = new String[LinhasCounts][3];
+            DataProduto = new String[LinhasCounts][4];
             ResultSet rs2 = statement.executeQuery("SELECT * FROM Produtos");
             int i=0;
             while(rs2.next()) {
@@ -165,6 +172,7 @@ public static void GeraTabelaProdutos(){
                 DataProduto[i][0]=rs2.getString("nomeProduto");
                 DataProduto[i][1]=rs2.getString("codBarras");
                 DataProduto[i][2]=rs2.getString("dataVencimento");
+                DataProduto[i][3]=rs2.getString("preco");
                 i++;
             }
             
@@ -190,6 +198,96 @@ public static void GeraTabelaProdutos(){
         }
     }
 
+public static void EditaTabelaGerentes(){
+    String sql="UPDATE Gerentes"
+            + " SET "
+            + " nome = ?,"
+            + " cpf = ?,"
+            + " email = ?,"
+            + " telefone = ?,"
+            + " contaBanco = ?,"
+            + " login = ?,"
+            + " senha = ?"
+            + " WHERE id = ?";//vai procurar em todo BD na coluna login and senha
+    
+        // ? sera substituido pelo conteudo das variaveis
+        try{
+            // Cria a conexão com o banco de dados
+            con = DriverManager.getConnection("jdbc:sqlite:src\\main\\java\\BasedeDados\\GestaoMercado.db");
+            Statement statement = con.createStatement();
+            statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar
+            
+            pat = con.prepareStatement(sql);
+            pat.setString(1,Gerentes.getNome());// 1 e 2 sao sequencia do ponto de interrogação
+            pat.setString(2,Gerentes.getCpf());//esse traço no gettext é por causa da caracteristica de esconde senha 
+            pat.setString(3,Gerentes.getEmail());
+            pat.setString(4,Gerentes.getTelefone());
+            pat.setString(5,Gerentes.getContaBanco());
+            pat.setString(6,"admin");
+            pat.setString(7,"admin");
+            pat.setInt(8,Gerentes.getId());
+            
+            pat.executeUpdate();
+            System.out.println("Atualizado com Sucesso!!!!");
+
+            
+            
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, ""+e);
+            System.out.println("Falha na Edição!!!!");
+        }finally {
+          try {
+            if(con != null){
+              con.close();
+            }
+          } catch(SQLException e) {
+            // Falhou também para fechar o arquivo
+            System.err.println(e.getMessage());
+          }
+        }
+}
+public static void EditaTabelaProdutos(){
+    String sql="UPDATE Produtos"
+            + " SET "
+            + " nomeProduto = ?,"
+            + " codBarras = ?,"
+            + " dataVencimento = ?,"
+            + " preco = ?"            
+            + " WHERE id = ?";//vai procurar em todo BD na coluna login and senha
+    
+        // ? sera substituido pelo conteudo das variaveis
+        try{
+            // Cria a conexão com o banco de dados
+            con = DriverManager.getConnection("jdbc:sqlite:src\\main\\java\\BasedeDados\\GestaoMercado.db");
+            Statement statement = con.createStatement();
+            statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar
+            
+            pat = con.prepareStatement(sql);
+            pat.setString(1,Produtos.getNome());// 1 e 2 sao sequencia do ponto de interrogação
+            pat.setString(2,Produtos.getCodBarras());//esse traço no gettext é por causa da caracteristica de esconde senha 
+            pat.setString(3,Produtos.getDataVencimento());
+            pat.setString(4,Produtos.getPreco());
+            pat.setInt(5,Produtos.getId());
+            
+            pat.executeUpdate();
+            System.out.println("Atualizado com Sucesso!!!!");
+
+            
+            
+        }catch(Exception e){
+            JOptionPane.showConfirmDialog(null, ""+e);
+            System.out.println("Falha na Edição!!!!");
+        }finally {
+          try {
+            if(con != null){
+              con.close();
+            }
+          } catch(SQLException e) {
+            // Falhou também para fechar o arquivo
+            System.err.println(e.getMessage());
+          }
+        }
+}
 public static void LerTabelaGerentes(){
     PreparedStatement pat=null;
     Connection connection = null;
@@ -295,7 +393,7 @@ public static void LerTabelaProdutos(){
             
             System.out.println("List of tables: ");
             while (!res.next() && Atable!=1) {
-                Atable=1;
+                Atable=1;//para nao pecorrer infinitamente tabelas que nao existe
                 System.out.println("Nao existe Tabela, Gerando uma nova tabela: ");//null se nao existe
                 
                 // Roda os comandos para o SQLite
@@ -304,7 +402,8 @@ public static void LerTabelaProdutos(){
                 +"id integer PRIMARY KEY AUTOINCREMENT,"
                 +"nomeProduto STRING NOT NULL,"
                 +"codBarras STRING,"
-                +"dataVencimento STRING"
+                +"dataVencimento STRING,"
+                +"preco STRING"
                 +" )");
                 
                
@@ -318,7 +417,7 @@ public static void LerTabelaProdutos(){
             }
             LinhasCounts++;
             
-            DataProduto = new String[LinhasCounts][3];
+            DataProduto = new String[LinhasCounts][4];
             ResultSet rs2 = statement.executeQuery("SELECT * FROM Produtos");
             int i=0;
             while(rs2.next()) {
@@ -326,6 +425,7 @@ public static void LerTabelaProdutos(){
                 DataProduto[i][0]=rs2.getString("nomeProduto");
                 DataProduto[i][1]=rs2.getString("codBarras");
                 DataProduto[i][2]=rs2.getString("dataVencimento");
+                DataProduto[i][3]=rs2.getString("preco");
                 i++;
             }
             //System.out.println("LinhasCounts : "+ LinhasCounts);

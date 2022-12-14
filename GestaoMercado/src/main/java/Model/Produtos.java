@@ -13,10 +13,14 @@ import lombok.Setter;
  */
 public class Produtos {
     @Getter@Setter
+    public static Integer Id;
+    @Getter@Setter
     public static String Nome;
     @Getter@Setter
     public static String CodBarras;
     @Getter@Setter
-    public static String DataVencimento;  
+    public static String DataVencimento;
+    @Getter@Setter
+    public static String Preco;
     
 }

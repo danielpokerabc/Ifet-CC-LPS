@@ -13,9 +13,8 @@ import lombok.Setter;
 
 public class Gerentes extends Pessoa{
     
-    @Getter@Setter
-    public static String[][] Data;// = new String[8][8];
-    
+    //@Getter@Setter
+    //public static String[][] Data;// = new String[8][8];//Armazena os dados do gerente para exibir na tabela
     
     public Gerentes(Integer id,String Nome, String Email,String Telefone,String Cpf,String ContaBanco) {
         super(id,Nome,Email,Telefone,Cpf,ContaBanco);

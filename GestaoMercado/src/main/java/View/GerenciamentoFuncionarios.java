@@ -4,7 +4,8 @@
  */
 package View;
 
-import BasedeDados.DadosFormulario;
+import BasedeDados.GerenciadorBD;
+import static BasedeDados.GerenciadorBD.EditaTabelaGerentes;
 import Model.Gerentes;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,10 +24,11 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     /**
      * Creates new form CadastroFuncionarios
      */
+    private int idVerifica=0;
     public GerenciamentoFuncionarios() {
         initComponents();
         habilitarDesabilitaCampos(false);
-        DadosFormulario.LerTabelaGerentes();
+        
         Jtable();
     }
 
@@ -57,7 +59,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
         jButton2SalvaConfirmado = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
+        ButtonEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -123,7 +125,12 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        jButton7.setText("Editar");
+        ButtonEditar.setText("Editar");
+        ButtonEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonEditarActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -136,6 +143,11 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                 "Nome", "CPF", "Email", "Telefone", "Conta de Banco"
             }
         ));
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -180,7 +192,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7)
+                                .addComponent(ButtonEditar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -214,7 +226,7 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                     .addComponent(jButton6)
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jButton5)
-                        .addComponent(jButton7)
+                        .addComponent(ButtonEditar)
                         .addComponent(jButton2SalvaConfirmado)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -241,14 +253,14 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     
     public void Jtable(){
         String Titulo[] ={"id","Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
-        
-        DefaultTableModel model = new DefaultTableModel(DadosFormulario.DataGerente,Titulo);
+        GerenciadorBD.LerTabelaGerentes();
+        DefaultTableModel model = new DefaultTableModel(GerenciadorBD.DataGerente,Titulo);
         jTable1.setModel(model);
     }
     private void BotaoSalvaOUConfirma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvaOUConfirma
         // TODO add your handling code here:
         
-        if((!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
+        if((idVerifica==0) &&(!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
             //Funcionarios funcion = new Gerentes(0,"","","","","");
         
             //Gerentes.setId(1);
@@ -258,12 +270,31 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             Gerentes.setTelefone(jTextTelefone.getText());
             Gerentes.setContaBanco(jTextContaBanco.getText());
 
-            DadosFormulario.GeraTabela();
-            DadosFormulario.LerTabelaGerentes();
+            GerenciadorBD.AdicionaGerente();
+            GerenciadorBD.LerTabelaGerentes();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
-        }else{
+            idVerifica=0;
+        }
+        if((idVerifica==1) &&(!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
+            //Funcionarios funcion = new Gerentes(0,"","","","","");
+        
+            //Gerentes.setId(1);
+            Gerentes.setNome(TextNome.getText());
+            Gerentes.setCpf(jTextCPF.getText());
+            Gerentes.setEmail(jTextEmail.getText());
+            Gerentes.setTelefone(jTextTelefone.getText());
+            Gerentes.setContaBanco(jTextContaBanco.getText());
+
+            GerenciadorBD.EditaTabelaGerentes();
+            GerenciadorBD.LerTabelaGerentes();
+            Jtable();
+            limparCampos();
+            habilitarDesabilitaCampos(false);
+            idVerifica=0;
+        }
+        else{
             jDialog dialog = new jDialog();
             dialog.setVisible(true);
             
@@ -273,7 +304,9 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         // TODO add your handling code here:
+        limparCampos();
         habilitarDesabilitaCampos(true);
+        idVerifica=0;
     }//GEN-LAST:event_jButton5ActionPerformed
     public void habilitarDesabilitaCampos(boolean flag) {
         TextNome.setEnabled(flag);
@@ -290,6 +323,25 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     private void TextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextNomeActionPerformed
+
+    private void ButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditarActionPerformed
+        EditaTabelaGerentes();
+        Jtable();
+    }//GEN-LAST:event_ButtonEditarActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        DefaultTableModel tmodel=(DefaultTableModel)jTable1.getModel();
+        int selectPosicaoTable = jTable1.getSelectedRow();
+        
+        Gerentes.setId(Integer.parseInt(tmodel.getValueAt(selectPosicaoTable, 0).toString()));
+        TextNome.setText(tmodel.getValueAt(selectPosicaoTable, 1).toString());
+        jTextCPF.setText(tmodel.getValueAt(selectPosicaoTable, 2).toString());
+        jTextEmail.setText(tmodel.getValueAt(selectPosicaoTable, 3).toString());
+        jTextTelefone.setText(tmodel.getValueAt(selectPosicaoTable, 4).toString());
+        jTextContaBanco.setText(tmodel.getValueAt(selectPosicaoTable, 5).toString());
+        habilitarDesabilitaCampos(true);
+        idVerifica=1;
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -328,13 +380,13 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton ButtonEditar;
     private javax.swing.JTextField TextNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2SalvaConfirmado;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

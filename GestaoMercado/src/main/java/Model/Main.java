@@ -12,10 +12,9 @@ public class Main {
     
     public static void main(String[] args) {
         
-        ViewLogin viewLogin = new ViewLogin();
-        viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
-        //Menu telaMenu = new Menu();
-        //telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
+        
+        Menu telaMenu = new Menu();
+        telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
         
         
     }

@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package View;
+import BasedeDados.GerenciadorBD;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 /**
  *
  * @author PDaniel
@@ -31,6 +33,7 @@ public class Menu extends javax.swing.JFrame {
         CadastroProdutos1 = new javax.swing.JButton();
         RelatoriosGerais1 = new javax.swing.JButton();
         layoutTop1 = new Model.LayoutTop();
+        ButtonLogin = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(102, 102, 102));
@@ -76,27 +79,39 @@ public class Menu extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
+        ButtonLogin.setText("Login");
+        ButtonLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ButtonLoginActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(171, 171, 171)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(CadastroFuncionarios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(RelatoriosGerais1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(CadastroProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(104, 104, 104)
-                        .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(119, Short.MAX_VALUE))
+                .addGap(171, 171, 171)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(CadastroFuncionarios1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(RelatoriosGerais1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(CadastroProdutos1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(191, Short.MAX_VALUE))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(104, 104, 104)
+                .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(ButtonLogin)
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(layoutTop1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(ButtonLogin)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(CadastroFuncionarios1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -113,15 +128,50 @@ public class Menu extends javax.swing.JFrame {
 
     private void CadastroFuncionarios1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroFuncionarios1ActionPerformed
         // TODO add your handling code here:
-        GerenciamentoFuncionarios telaCRUD = new GerenciamentoFuncionarios();
-        telaCRUD.setVisible(true);//Fun�ao padrao para ativar a tela
+        
+        if(GerenciadorBD.LoginConfirm==1){
+            
+            GerenciamentoFuncionarios telaCRUD = new GerenciamentoFuncionarios();
+            telaCRUD.setVisible(true);//Fun�ao padrao para ativar a tela
+        }
+        else{
+            ViewLogin viewLogin = new ViewLogin();
+            viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
+        }
+        
     }//GEN-LAST:event_CadastroFuncionarios1ActionPerformed
 
     private void CadastroProdutos1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CadastroProdutos1ActionPerformed
         
-        GerenciamentoProdutos telaProdutos = new GerenciamentoProdutos();
-        telaProdutos.setVisible(true);//Fun�ao padrao para ativar a tela
+        if(GerenciadorBD.LoginConfirm==1){
+            
+            GerenciamentoProdutos telaProdutos = new GerenciamentoProdutos();
+            telaProdutos.setVisible(true);//Fun�ao padrao para ativar a tela
+        }
+        else{
+            ViewLogin viewLogin = new ViewLogin();
+            viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
+        }
+        
     }//GEN-LAST:event_CadastroProdutos1ActionPerformed
+    public static void ParaMudarNomeBotao(){
+        //ButtonLogin.setText("Executar");
+        if(GerenciadorBD.LoginConfirm==1){
+            ButtonLogin.setText("Sair");
+        }
+    }
+    private void ButtonLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonLoginActionPerformed
+        // TODO add your handling code here:
+        
+        if(GerenciadorBD.LoginConfirm==1){
+            GerenciadorBD.LoginConfirm=0;
+            ButtonLogin.setText("Login");
+            JOptionPane.showMessageDialog(null, "Deslogado com Sucesso!!!!");
+        }else{
+            ViewLogin viewLogin = new ViewLogin();
+            viewLogin.setVisible(true);//Fun�ao padrao para ativar a tela
+        }
+    }//GEN-LAST:event_ButtonLoginActionPerformed
 
     /**
      * @param args the command line arguments
@@ -154,11 +204,13 @@ public class Menu extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new Menu().setVisible(true);
+                
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    public static javax.swing.JButton ButtonLogin;
     private javax.swing.JButton CadastroFuncionarios1;
     private javax.swing.JButton CadastroProdutos1;
     private javax.swing.JButton RelatoriosGerais1;

@@ -4,7 +4,8 @@
  */
 package View;
 
-import static BasedeDados.DadosFormulario.VerificaLogin;
+import static BasedeDados.GerenciadorBD.LoginConfirm;
+import static BasedeDados.GerenciadorBD.VerificaLogin;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ViewLogin extends javax.swing.JFrame {
 
         jTextField1.setText("jTextField1");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -100,7 +101,16 @@ public class ViewLogin extends javax.swing.JFrame {
     public void Logar(){
         
         VerificaLogin(txtLogin.getText(),txtSenha.getText());
+        if(LoginConfirm==1){
+            LoginTrue();
+        }
         
+    }
+    public void LoginTrue(){
+        ViewLogin telaLogin = new ViewLogin();
+        telaLogin.setVisible(false);//Fun�ao padrao para ativar a tela
+        this.dispose();
+        //Runtime.getRuntime().exit(0);
     }
     private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
         // TODO add your handling code here:
