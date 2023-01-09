@@ -4,19 +4,19 @@
  */
 package View;
 
-import static BasedeDados.GerenciadorBD.LoginConfirm;
-import static BasedeDados.GerenciadorBD.VerificaLogin;
+import Controller.ControllerLogins;
+import Model.DAO.VerificaLoginDAO;
 
 /**
  *
  * @author PDaniel
  */
-public class ViewLogin extends javax.swing.JFrame {
+public class ViewLogins extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewLogin
      */
-    public ViewLogin() {
+    public ViewLogins() {
         initComponents();
     }
 
@@ -47,6 +47,12 @@ public class ViewLogin extends javax.swing.JFrame {
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel2.setText("Senha");
+
+        txtSenha.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtSenhaActionPerformed(evt);
+            }
+        });
 
         Confirmar.setText("Confirmar");
         Confirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -100,14 +106,14 @@ public class ViewLogin extends javax.swing.JFrame {
     
     public void Logar(){
         
-        VerificaLogin(txtLogin.getText(),txtSenha.getText());
-        if(LoginConfirm==1){
+        ControllerLogins.ControllerVerificaLogin(txtLogin.getText(),txtSenha.getText());
+        if(VerificaLoginDAO.LoginConfirm==1){
             LoginTrue();
         }
         
     }
     public void LoginTrue(){
-        ViewLogin telaLogin = new ViewLogin();
+        ViewLogins telaLogin = new ViewLogins();
         telaLogin.setVisible(false);//Fun�ao padrao para ativar a tela
         this.dispose();
         //Runtime.getRuntime().exit(0);
@@ -120,6 +126,10 @@ public class ViewLogin extends javax.swing.JFrame {
         // TODO add your handling code here:
         Logar();
     }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void txtSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSenhaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtSenhaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -138,20 +148,27 @@ public class ViewLogin extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(ViewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLogins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(ViewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLogins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(ViewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLogins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(ViewLogin.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(ViewLogins.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewLogin().setVisible(true);
+                new ViewLogins().setVisible(true);
             }
         });
     }

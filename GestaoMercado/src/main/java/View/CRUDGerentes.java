@@ -4,28 +4,21 @@
  */
 package View;
 
-import BasedeDados.GerenciadorBD;
-import static BasedeDados.GerenciadorBD.EditaTabelaGerentes;
+import Model.DAO.GerenteDAOs;
 import Model.Gerentes;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JDialog;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author PDaniel
  */
-public class GerenciamentoFuncionarios extends javax.swing.JFrame {
+public class CRUDGerentes extends javax.swing.JFrame {
 
     /**
      * Creates new form CadastroFuncionarios
      */
     private int idVerifica=0;
-    public GerenciamentoFuncionarios() {
+    public CRUDGerentes() {
         initComponents();
         habilitarDesabilitaCampos(false);
         
@@ -59,7 +52,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
         jButton2SalvaConfirmado = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        ButtonEditar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
 
@@ -125,13 +117,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             }
         });
 
-        ButtonEditar.setText("Editar");
-        ButtonEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                ButtonEditarActionPerformed(evt);
-            }
-        });
-
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null},
@@ -192,8 +177,6 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ButtonEditar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2SalvaConfirmado)))
@@ -222,12 +205,10 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                     .addComponent(jLabel6)
                     .addComponent(jTextContaBanco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5)
-                        .addComponent(ButtonEditar)
-                        .addComponent(jButton2SalvaConfirmado)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton5)
+                    .addComponent(jButton2SalvaConfirmado)
+                    .addComponent(jButton6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 171, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -253,8 +234,8 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     
     public void Jtable(){
         String Titulo[] ={"id","Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
-        GerenciadorBD.LerTabelaGerentes();
-        DefaultTableModel model = new DefaultTableModel(GerenciadorBD.DataGerente,Titulo);
+        GerenteDAOs.LerTabelaGerentes();
+        DefaultTableModel model = new DefaultTableModel(GerenteDAOs.DataGerente,Titulo);
         jTable1.setModel(model);
     }
     private void BotaoSalvaOUConfirma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvaOUConfirma
@@ -270,8 +251,8 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             Gerentes.setTelefone(jTextTelefone.getText());
             Gerentes.setContaBanco(jTextContaBanco.getText());
 
-            GerenciadorBD.AdicionaGerente();
-            GerenciadorBD.LerTabelaGerentes();
+            GerenteDAOs.AdicionaGerente();
+            GerenteDAOs.LerTabelaGerentes();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
@@ -287,15 +268,15 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
             Gerentes.setTelefone(jTextTelefone.getText());
             Gerentes.setContaBanco(jTextContaBanco.getText());
 
-            GerenciadorBD.EditaTabelaGerentes();
-            GerenciadorBD.LerTabelaGerentes();
+            GerenteDAOs.EditaTabelaGerentes();
+            GerenteDAOs.LerTabelaGerentes();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
             idVerifica=0;
         }
-        else{
-            jDialog dialog = new jDialog();
+        if((TextNome.getText()==null)&&(jTextCPF.getText()==null)&&(jTextEmail.getText()==null)&&(jTextTelefone.getText()==null)&&(jTextContaBanco.getText()==null)){
+            PreencherCampo dialog = new PreencherCampo();
             dialog.setVisible(true);
             
         }
@@ -318,16 +299,19 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
     }
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
+        if(idVerifica==1){
+            GerenteDAOs.DeletaRegistroGerente(Gerentes.getId());
+            GerenteDAOs.LerTabelaGerentes();
+            Jtable();
+            limparCampos();
+            habilitarDesabilitaCampos(false);
+        }
+        idVerifica=0;
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void TextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextNomeActionPerformed
-
-    private void ButtonEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ButtonEditarActionPerformed
-        EditaTabelaGerentes();
-        Jtable();
-    }//GEN-LAST:event_ButtonEditarActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         DefaultTableModel tmodel=(DefaultTableModel)jTable1.getModel();
@@ -360,27 +344,32 @@ public class GerenciamentoFuncionarios extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDGerentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDGerentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDGerentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(GerenciamentoFuncionarios.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CRUDGerentes.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new GerenciamentoFuncionarios().setVisible(true);
+                new CRUDGerentes().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton ButtonEditar;
     private javax.swing.JTextField TextNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2SalvaConfirmado;

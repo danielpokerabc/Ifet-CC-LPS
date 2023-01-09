@@ -8,12 +8,12 @@ package View;
  *
  * @author PDaniel
  */
-public class jDialog extends javax.swing.JFrame {
+public class PreencherCampo extends javax.swing.JFrame {
 
     /**
      * Creates new form jDialog
      */
-    public jDialog() {
+    public PreencherCampo() {
         initComponents();
     }
 
@@ -68,7 +68,7 @@ public class jDialog extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        jDialog dialog = new jDialog();
+        PreencherCampo dialog = new PreencherCampo();
         dialog.setVisible(false);
         this.dispose();
         //setDefaultCloseOperation(dialog.EXIT_ON_CLOSE);
@@ -92,13 +92,13 @@ public class jDialog extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreencherCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreencherCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreencherCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PreencherCampo.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -107,6 +107,30 @@ public class jDialog extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
                 new jDialog().setVisible(true);
+            }
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PreencherCampos().setVisible(true);
+            }
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new jDialog().setVisible(true);
+            }
+        //</editor-fold>
+
+        /* Create and display the form */
+        /*
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                new PreencherCampo().setVisible(true);
             }
         });*/
     }

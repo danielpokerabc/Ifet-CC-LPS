@@ -4,13 +4,16 @@
  */
 package Controller;
 
-import Model.Gerentes;
-import java.util.ArrayList;
+import Model.DAO.VerificaLoginDAO;
 
 /**
  *
  * @author PDaniel
  */
-public class ControllerFuncionarios {
-    ArrayList<Gerentes> funcionario = new ArrayList<>();
+public class ControllerLogins {
+    
+    public static void ControllerVerificaLogin(String login, String senha){
+        VerificaLoginDAO.VerificaLogin(login, senha);
+    }
+    
 }

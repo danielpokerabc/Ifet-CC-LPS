@@ -5,17 +5,19 @@
 
 package Model;
 
-import View.Menu;
-import View.ViewLogin;
+import View.CRUDProdutos;
+import View.MenuPrincipal;
+import View.SelectImagens;
+import View.ViewLogins;
 
 public class Main {
     
     public static void main(String[] args) {
         
-        
-        Menu telaMenu = new Menu();
-        telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
-        
+        MenuPrincipal telaMenu = new MenuPrincipal();
+        //telaMenu.setVisible(true);//Fun�ao padrao para ativar a tela
+        //CRUDProdutos telaMenu = new CRUDProdutos();
+        telaMenu.setVisible(true);
         
     }
 }
