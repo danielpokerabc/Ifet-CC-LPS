@@ -17,6 +17,7 @@ import java.awt.event.ActionListener;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.JDesktopPane;
 import javax.swing.JOptionPane;
 import lombok.Getter;
@@ -61,7 +62,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
             }
             
             if(((i%3) == 0)&& (i!=0)){
-                LColuna+=110;
+                LColuna+=148;//110
                 Linha=0;
                 AtivaBarra=true;
             }
@@ -190,7 +191,12 @@ public class MenuPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
         System.out.print("zzzz");
     }//GEN-LAST:event_jButton1ActionPerformed
-
+    
+    public void BotaoMaisMenos(){
+        JTextField jTextField = new JTextField();
+        jTextField.setLocation(100, 100);
+        jPanel1.add(jTextField);
+    }
    
     public void Botao(){
         
@@ -206,28 +212,49 @@ public class MenuPrincipal extends javax.swing.JFrame {
         adicionar.setPreferredSize(new Dimension(107, 105));
         
         adicionar.setIcon(new ImageIcon("src\\main\\java\\Image\\ProdutoIds"+ProdutosDAOs.DataProduto[i][0]+".png"));
-        //adicionar.
-        //jPanel1.setSize(500, 200);
-        //jScrollPane1.setSize(500, 200);
         
-        jPanel1.add(adicionar);
+        //jPanel1.add(adicionar);
         jPanel1.setPreferredSize(new Dimension(BarraX, BarraY));
-        
+        BotaoMaisMenos();
         
         JDesktopPane jDesktopPane1 = new JDesktopPane();
-        jDesktopPane1.setSize(227, 105);
+        jDesktopPane1.setSize(227, 135);
         jDesktopPane1.setLocation(Linha, LColuna);
         jDesktopPane1.add(adicionar);
-        jPanel1.add(jDesktopPane1);
-        //Para Atualizar os botoes no Painel
-        jScrollPane1.setVisible(false);
-        jScrollPane1.setVisible(true);
-        //
         
+        JTextField jTextField = new JTextField();
+        jTextField.setLocation(100, 110);
+        jTextField.setToolTipText("Quantidade");
+        jTextField.setSize(40, 20);
+        jDesktopPane1.add(jTextField);
+        
+        JButton Bmais = new JButton();
+        Bmais.setText("+");
+        Bmais.setForeground(Color.BLACK);
+        Bmais.setMargin(new Insets(2, 10, 2, 14));
+        Bmais.setFont(new Font("Linux libertine G", Font.BOLD, 17));
+        Bmais.setSize(40, 20);
+        Bmais.setLocation(130, 110);
+        Bmais.setContentAreaFilled(false);//desativa efeito botao
+        Bmais.setBorderPainted(false);
+        jDesktopPane1.add(Bmais);
+        
+        JButton Bmenos = new JButton();
+        Bmenos.setText("-");
+        Bmenos.setForeground(Color.BLACK);
+        Bmenos.setMargin(new Insets(2, 10, 2, 14));
+        Bmenos.setFont(new Font("Linux libertine G", Font.BOLD, 17));
+        Bmenos.setSize(40, 20);
+        Bmenos.setLocation(70, 110);
+        Bmenos.setContentAreaFilled(false);//desativa efeito botao
+        Bmenos.setBorderPainted(false);
+        jDesktopPane1.add(Bmenos);
+        
+        jPanel1.add(jDesktopPane1);
+                
         //jPanel1.revalidate();
         //jPanel1.repaint();
-        
-        
+                
     }
     public static void main(String args[]) {
         int a=0;
