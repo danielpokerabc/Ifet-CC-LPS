@@ -256,7 +256,37 @@ public class ProdutosDAOs {
               }
             }
         }
-    
+    public static void DeletaRegistroProdutos(int id){
+        PreparedStatement pat=null;
+        Connection connection = null;
+        try {
+            // Cria a conexão com o banco de dados
+            connection = DriverManager.getConnection("jdbc:sqlite:src\\main\\java\\BasedeDadosDAO\\GestaoMercado.db");
+            Statement statement = connection.createStatement();
+            statement.setQueryTimeout(30);  // Espera só por 30 segundos para conectar
+                        
+            ResultSet rs = statement.executeQuery("SELECT * FROM Produtos");
+                        
+            statement.execute("DELETE from Produtos where id="+id);      
+            
+            
+        } catch(SQLException e) {
+          // Se a mensagem de erro for: "out of memory",
+          // Provavelmente erro ao criar(permissão) ou caminho do banco de dados
+          System.err.println(e.getMessage());
+        }
+
+        finally {
+          try {
+            if(connection != null){
+              connection.close();
+            }
+          } catch(SQLException e) {
+            // Falhou também para fechar o arquivo
+            System.err.println(e.getMessage());
+          }
+        }
+    }
     public static byte[] converterImagem(File file) {
         
         try {

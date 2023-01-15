@@ -7,6 +7,7 @@ package Model.DAO;
 import Model.Cliente;
 import static Model.DAO.GerenteDAOs.DataGerente;
 import Model.Gerentes;
+import Model.Pessoa;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -64,7 +65,7 @@ public class ClienteDAOs {
                 +"cpf STRING,"
                 +"email STRING,"
                 +"telefone STRING,"
-                +"contaBanco STRING,"
+                +"endereco STRING,"
                 +"login STRING,"
                 +"senha STRING )");
                 
@@ -77,7 +78,6 @@ public class ClienteDAOs {
               LinhasCounts++;
 
             }
-            LinhasCounts++;
             
             DataCliente = new String[LinhasCounts][8];
             ResultSet rs2 = statement.executeQuery("SELECT * FROM Clientes");
@@ -89,10 +89,12 @@ public class ClienteDAOs {
                 DataCliente[i][2]=rs2.getString("cpf");
                 DataCliente[i][3]=rs2.getString("email");
                 DataCliente[i][4]=rs2.getString("telefone");
-                DataCliente[i][5]=rs2.getString("contaBanco");
+                DataCliente[i][5]=rs2.getString("endereco");
                 DataCliente[i][6]=rs2.getString("login");
                 DataCliente[i][7]=rs2.getString("senha");
-                
+                Pessoa.setContaBanco(rs2.getString("endereco"));
+                Pessoa.setNome(rs2.getString("nome"));
+                Pessoa.setTelefone(rs2.getString("telefone"));
                 i++;
             }
             //System.out.println("LinhasCounts : "+ LinhasCounts);
@@ -128,8 +130,11 @@ public class ClienteDAOs {
             ResultSet rs = statement.executeQuery("SELECT * FROM Clientes");
             //ResultSet rsLinhas = statement.executeQuery("SELECT COUNT(id) FROM Gerentes");
             LinhasCounts=0;
+            int MaxLinhasCounts=0;
             while(rs.next()) {
-              LinhasCounts++;
+              if(MaxLinhasCounts<Integer.parseInt(rs.getString("id"))){
+                  LinhasCounts=Integer.parseInt(rs.getString("id"));
+              }
 
             }
             LinhasCounts++;
@@ -172,7 +177,7 @@ public static void EditaTabelaClientes(){
             + " cpf = ?,"
             + " email = ?,"
             + " telefone = ?,"
-            + " contaBanco = ?,"
+            + " endereco = ?,"
             + " login = ?,"
             + " senha = ?"
             + " WHERE id = ?";//vai procurar em todo BD na coluna login and senha

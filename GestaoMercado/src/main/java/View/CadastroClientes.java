@@ -12,10 +12,13 @@ import Model.Gerentes;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -29,11 +32,19 @@ public class CadastroClientes extends javax.swing.JFrame {
     private int idVerifica=0;
     public CadastroClientes() {
         initComponents();
+        addMaskOnFields();
         limparCampos();
         habilitarDesabilitaCampos(true);
         idVerifica=0;
     }
-
+    public void addMaskOnFields(){
+        try {
+            MaskFormatter maskMatricula = new MaskFormatter("###.###.###-##");//# é numero....? é letra
+            maskMatricula.install(jTextCPF);//é necessario usar o JFormattedTextFields
+        } catch (ParseException ex) {
+            Logger.getLogger(jTextCPF.getText()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -51,7 +62,6 @@ public class CadastroClientes extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextCPF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextEmail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -59,6 +69,7 @@ public class CadastroClientes extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jTextContaBanco = new javax.swing.JTextField();
         jButton2SalvaConfirmado = new javax.swing.JButton();
+        jTextCPF = new javax.swing.JFormattedTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -83,12 +94,6 @@ public class CadastroClientes extends javax.swing.JFrame {
 
         jLabel3.setText("Cpf:");
 
-        jTextCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCPFActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Email:");
 
         jTextEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -108,6 +113,12 @@ public class CadastroClientes extends javax.swing.JFrame {
             }
         });
 
+        jTextCPF.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextCPFActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -122,21 +133,21 @@ public class CadastroClientes extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(TextNome))
                             .addGroup(layout.createSequentialGroup()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel5)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jTextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
                                         .addComponent(jLabel3)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jTextCPF)))
+                                        .addGap(18, 18, 18)
+                                        .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addGroup(layout.createSequentialGroup()
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addComponent(jLabel6))
                                     .addGroup(layout.createSequentialGroup()
-                                        .addGap(26, 26, 26)
+                                        .addGap(20, 20, 20)
                                         .addComponent(jLabel4)))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,9 +171,9 @@ public class CadastroClientes extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -176,10 +187,6 @@ public class CadastroClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void jTextCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCPFActionPerformed
 
     private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed
         // TODO add your handling code here:
@@ -206,34 +213,15 @@ public class CadastroClientes extends javax.swing.JFrame {
             Cliente.setContaBanco(jTextContaBanco.getText());
             
             ControllerCliente.LerTabelaClientesBD();
-            ControllerCliente.AdicionaClienteBD();
-            ControllerCliente.LerTabelaClientesBD();
+            ControllerCliente.AdicionaClienteBD(jTextCPF.getText());
             
-            limparCampos();
-            habilitarDesabilitaCampos(false);
-            idVerifica=0;
-        }
-        if((idVerifica==1) &&(!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
-            //Funcionarios funcion = new Gerentes(0,"","","","","");
-        
-            //Gerentes.setId(1);
-            Cliente.setNome(TextNome.getText());
-            Cliente.setCpf(jTextCPF.getText());
-            Cliente.setEmail(jTextEmail.getText());
-            Cliente.setTelefone(jTextTelefone.getText());
-            Cliente.setContaBanco(jTextContaBanco.getText());
-            
-            ControllerCliente.LerTabelaClientesBD();
-            ControllerCliente.AdicionaClienteBD();
-            ControllerCliente.LerTabelaClientesBD();
-            
-            limparCampos();
-            habilitarDesabilitaCampos(false);
-            idVerifica=0;
-        }
-        if((TextNome.getText()==null)&&(jTextCPF.getText()==null)&&(jTextEmail.getText()==null)&&(jTextTelefone.getText()==null)&&(jTextContaBanco.getText()==null)){
-            PreencherCampo dialog = new PreencherCampo();
-            dialog.setVisible(true);
+            if(ControllerCliente.ReturnVerificacaoCPF){
+                limparCampos();
+                habilitarDesabilitaCampos(false);
+                idVerifica=0;
+                JOptionPane.showMessageDialog(null, "Cadastro Realizado!!!!");   
+                this.dispose();
+            }
             
         }
         
@@ -249,6 +237,10 @@ public class CadastroClientes extends javax.swing.JFrame {
     private void TextNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TextNomeActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_TextNomeActionPerformed
+
+    private void jTextCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCPFActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextCPFActionPerformed
 
     /**
      * @param args the command line arguments
@@ -274,7 +266,7 @@ public class CadastroClientes extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JTextField jTextCPF;
+    private javax.swing.JFormattedTextField jTextCPF;
     private javax.swing.JTextField jTextContaBanco;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextField4;

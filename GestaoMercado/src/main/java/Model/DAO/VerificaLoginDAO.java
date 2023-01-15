@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Model.DAO;
+import Model.Pessoa;
 import View.MenuGerentes;
 import View.MenuPrincipal;
 import static View.MenuPrincipal.getNome;
@@ -52,10 +53,14 @@ public class VerificaLoginDAO {
                 
                 MenuPrincipal.setNome(rs.getString("nome"));
                 MenuPrincipal.jLabel1.setText("Bem Vindo! "+getNome());
-                MenuGerentes telaMenuGerente = new MenuGerentes();
-                telaMenuGerente.setVisible(true);//Fun�ao padrao para ativar a tela
                 
+                MenuPrincipal.BotaoAdiministradores();
                 System.out.println("Nome: "+rs.getString("nome"));
+                Pessoa.setContaBanco(rs.getString("endereco"));
+                Pessoa.setContaBanco(rs.getString("endereco"));
+                Pessoa.setNome(rs.getString("nome"));
+                Pessoa.setTelefone(rs.getString("telefone"));
+                
                 LoginConfirm=1;
                 JOptionPane.showMessageDialog(null, "Login Realizado!!!!");
                 //MenuGerente.ParaMudarNomeBotao();

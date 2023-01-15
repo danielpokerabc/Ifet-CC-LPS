@@ -6,6 +6,7 @@ package Model.DAO;
 
 
 import Model.Gerentes;
+import Model.Pessoa;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.DriverManager;
@@ -93,7 +94,7 @@ public static void EditaTabelaGerentes(){
             + " cpf = ?,"
             + " email = ?,"
             + " telefone = ?,"
-            + " contaBanco = ?,"
+            + " endereco = ?,"
             + " login = ?,"
             + " senha = ?"
             + " WHERE id = ?";//vai procurar em todo BD na coluna login and senha
@@ -168,7 +169,7 @@ public static void LerTabelaGerentes(){
                 +"cpf STRING,"
                 +"email STRING,"
                 +"telefone STRING,"
-                +"contaBanco STRING,"
+                +"endereco STRING,"
                 +"login STRING,"
                 +"senha STRING )");
                 
@@ -193,10 +194,12 @@ public static void LerTabelaGerentes(){
                 DataGerente[i][2]=rs2.getString("cpf");
                 DataGerente[i][3]=rs2.getString("email");
                 DataGerente[i][4]=rs2.getString("telefone");
-                DataGerente[i][5]=rs2.getString("contaBanco");
+                DataGerente[i][5]=rs2.getString("endereco");
                 DataGerente[i][6]=rs2.getString("login");
                 DataGerente[i][7]=rs2.getString("senha");
-                
+                Pessoa.setContaBanco(rs2.getString("endereco"));
+                Pessoa.setNome(rs2.getString("nome"));
+                Pessoa.setTelefone(rs2.getString("telefone"));
                 i++;
             }
             //System.out.println("LinhasCounts : "+ LinhasCounts);

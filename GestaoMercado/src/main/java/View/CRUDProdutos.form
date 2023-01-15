@@ -87,9 +87,16 @@
                               <Component id="txtNomeProduto" alignment="0" max="32767" attributes="0"/>
                               <Component id="txtCodBarras" alignment="0" max="32767" attributes="0"/>
                               <Group type="102" alignment="0" attributes="0">
-                                  <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                      <Component id="jLabel5" alignment="0" pref="160" max="32767" attributes="0"/>
-                                      <Component id="txtDataVencimento" alignment="0" max="32767" attributes="0"/>
+                                  <Group type="103" groupAlignment="1" attributes="0">
+                                      <Group type="102" attributes="0">
+                                          <Component id="ButtonNew" min="-2" pref="78" max="-2" attributes="0"/>
+                                          <EmptySpace min="-2" pref="7" max="-2" attributes="0"/>
+                                          <Component id="Apagars" min="-2" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Group type="103" groupAlignment="1" max="-2" attributes="0">
+                                          <Component id="jLabel5" alignment="0" pref="160" max="32767" attributes="0"/>
+                                          <Component id="txtDataVencimento" alignment="0" max="32767" attributes="0"/>
+                                      </Group>
                                   </Group>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -100,7 +107,6 @@
                           </Group>
                           <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
                           <Component id="jLabel3" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="ButtonNew" min="-2" pref="78" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -173,7 +179,10 @@
                   <Component id="txtPreco1" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="ButtonNew" min="-2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="3" attributes="0">
+                  <Component id="ButtonNew" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Apagars" alignment="3" min="-2" max="-2" attributes="0"/>
+              </Group>
               <EmptySpace max="32767" attributes="0"/>
               <Component id="jScrollPane3" min="-2" pref="141" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -329,6 +338,14 @@
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="10"/>
       </AuxValues>
+    </Component>
+    <Component class="javax.swing.JButton" name="Apagars">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Apagar"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ApagarsActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

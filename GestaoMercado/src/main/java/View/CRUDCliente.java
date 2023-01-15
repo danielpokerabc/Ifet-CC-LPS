@@ -9,7 +9,12 @@ import Model.Cliente;
 import static Model.DAO.ClienteDAOs.DataCliente;
 import Model.DAO.GerenteDAOs;
 import Model.Gerentes;
+import java.text.ParseException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 /**
  *
@@ -24,10 +29,17 @@ public class CRUDCliente extends javax.swing.JFrame {
     public CRUDCliente() {
         initComponents();
         habilitarDesabilitaCampos(false);
-        
+        addMaskOnFields();
         Jtable();
     }
-
+    public void addMaskOnFields(){
+        try {
+            MaskFormatter maskMatricula = new MaskFormatter("###.###.###-##");//# é numero....? é letra
+            maskMatricula.install(TextCPF);//é necessario usar o JFormattedTextFields
+        } catch (ParseException ex) {
+            Logger.getLogger(TextCPF.getText()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,7 +57,6 @@ public class CRUDCliente extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jTextCPF = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jTextEmail = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
@@ -57,6 +68,7 @@ public class CRUDCliente extends javax.swing.JFrame {
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        TextCPF = new javax.swing.JFormattedTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -81,12 +93,6 @@ public class CRUDCliente extends javax.swing.JFrame {
 
         jLabel3.setText("Cpf:");
 
-        jTextCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCPFActionPerformed(evt);
-            }
-        });
-
         jLabel4.setText("Email:");
 
         jTextEmail.addActionListener(new java.awt.event.ActionListener() {
@@ -97,7 +103,7 @@ public class CRUDCliente extends javax.swing.JFrame {
 
         jLabel5.setText("Telefone:");
 
-        jLabel6.setText("ContaBanco:");
+        jLabel6.setText("Endereço:");
 
         jButton2SalvaConfirmado.setText("Confirmar ");
         jButton2SalvaConfirmado.addActionListener(new java.awt.event.ActionListener() {
@@ -128,7 +134,7 @@ public class CRUDCliente extends javax.swing.JFrame {
                 {null, null, null, null, null}
             },
             new String [] {
-                "Nome", "CPF", "Email", "Telefone", "Conta de Banco"
+                "Nome", "CPF", "Email", "Telefone", "Endereço"
             }
         ));
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -138,6 +144,8 @@ public class CRUDCliente extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        TextCPF.setToolTipText("");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -145,43 +153,40 @@ public class CRUDCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel1)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(TextNome))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel5)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextTelefone))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                                .addComponent(jLabel3)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel6)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextContaBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel4)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(jTextEmail))))))
                             .addGroup(layout.createSequentialGroup()
-                                .addContainerGap()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(TextNome))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel5)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextTelefone, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel3)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(TextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel6)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextContaBanco, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel4)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(jTextEmail))))
+                            .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jButton6)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton2SalvaConfirmado)))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 481, Short.MAX_VALUE))
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addGap(138, 138, 138)
@@ -199,9 +204,9 @@ public class CRUDCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(jTextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(TextCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -221,68 +226,64 @@ public class CRUDCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCPFActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jTextCPFActionPerformed
-
     private void jTextEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextEmailActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextEmailActionPerformed
     public void limparCampos() {
         TextNome.setText("");
-        jTextCPF.setText("");
+        TextCPF.setText("");
         jTextEmail.setText("");
         jTextTelefone.setText("");
         jTextContaBanco.setText("");
     }
     
     public void Jtable(){
-        String Titulo[] ={"id","Nome", "CPF", "Email", "Telefone", "Conta de Banco"};
+        String Titulo[] ={"id","Nome", "CPF", "Email", "Telefone", "Endereço"};
         ControllerCliente.LerTabelaClientesBD();
         DefaultTableModel model = new DefaultTableModel(DataCliente,Titulo);
         jTable1.setModel(model);
     }
     private void BotaoSalvaOUConfirma(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BotaoSalvaOUConfirma
         // TODO add your handling code here:
-        
-        if((idVerifica==0) &&(!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
+        boolean VerificaCampos=false;
+        if((idVerifica==0) &&(!TextNome.getText().isEmpty())&&(!TextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
             //Funcionarios funcion = new Gerentes(0,"","","","","");
         
             //Gerentes.setId(1);
             Cliente.setNome(TextNome.getText());
-            Cliente.setCpf(jTextCPF.getText());
+            Cliente.setCpf(TextCPF.getText());
             Cliente.setEmail(jTextEmail.getText());
             Cliente.setTelefone(jTextTelefone.getText());
             Cliente.setContaBanco(jTextContaBanco.getText());
 
-            ControllerCliente.AdicionaClienteBD();
+            ControllerCliente.AdicionaClienteBD(TextCPF.getText());
             ControllerCliente.LerTabelaClientesBD();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
             idVerifica=0;
+            VerificaCampos=true;
         }
-        if((idVerifica==1) &&(!TextNome.getText().isEmpty())&&(!jTextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
+        if((idVerifica==1) &&(!TextNome.getText().isEmpty())&&(!TextCPF.getText().isEmpty())&&(!jTextEmail.getText().isEmpty())&&(!jTextTelefone.getText().isEmpty())&&(!jTextContaBanco.getText().isEmpty())){
             //Funcionarios funcion = new Gerentes(0,"","","","","");
         
             //Gerentes.setId(1);
             Cliente.setNome(TextNome.getText());
-            Cliente.setCpf(jTextCPF.getText());
+            Cliente.setCpf(TextCPF.getText());
             Cliente.setEmail(jTextEmail.getText());
             Cliente.setTelefone(jTextTelefone.getText());
             Cliente.setContaBanco(jTextContaBanco.getText());
 
-            ControllerCliente.EditaClienteBD();
+            ControllerCliente.EditaClienteBD(TextCPF.getText());
             ControllerCliente.LerTabelaClientesBD();
             Jtable();
             limparCampos();
             habilitarDesabilitaCampos(false);
             idVerifica=0;
+            VerificaCampos=true;
         }
-        if((TextNome.getText()==null)&&(jTextCPF.getText()==null)&&(jTextEmail.getText()==null)&&(jTextTelefone.getText()==null)&&(jTextContaBanco.getText()==null)){
-            PreencherCampo dialog = new PreencherCampo();
-            dialog.setVisible(true);
-            
+        if(VerificaCampos==false){
+            JOptionPane.showMessageDialog(null, "Preencher Todos os Campos!!!!");   
         }
         
     }//GEN-LAST:event_BotaoSalvaOUConfirma
@@ -295,7 +296,7 @@ public class CRUDCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
     public void habilitarDesabilitaCampos(boolean flag) {
         TextNome.setEnabled(flag);
-        jTextCPF.setEnabled(flag);
+        TextCPF.setEnabled(flag);
         jTextEmail.setEnabled(flag);
         jTextTelefone.setEnabled(flag);
         jTextContaBanco.setEnabled(flag);
@@ -323,7 +324,7 @@ public class CRUDCliente extends javax.swing.JFrame {
         
         Cliente.setId(Integer.parseInt(tmodel.getValueAt(selectPosicaoTable, 0).toString()));
         TextNome.setText(tmodel.getValueAt(selectPosicaoTable, 1).toString());
-        jTextCPF.setText(tmodel.getValueAt(selectPosicaoTable, 2).toString());
+        TextCPF.setText(tmodel.getValueAt(selectPosicaoTable, 2).toString());
         jTextEmail.setText(tmodel.getValueAt(selectPosicaoTable, 3).toString());
         jTextTelefone.setText(tmodel.getValueAt(selectPosicaoTable, 4).toString());
         jTextContaBanco.setText(tmodel.getValueAt(selectPosicaoTable, 5).toString());
@@ -382,6 +383,7 @@ public class CRUDCliente extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JFormattedTextField TextCPF;
     private javax.swing.JTextField TextNome;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2SalvaConfirmado;
@@ -397,7 +399,6 @@ public class CRUDCliente extends javax.swing.JFrame {
     private javax.swing.JMenu jMenu1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextCPF;
     private javax.swing.JTextField jTextContaBanco;
     private javax.swing.JTextField jTextEmail;
     private javax.swing.JTextField jTextField4;

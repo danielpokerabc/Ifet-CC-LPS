@@ -64,6 +64,7 @@ public class CRUDProdutos extends javax.swing.JFrame {
         ButtonNew1 = new javax.swing.JButton();
         txtPreco1 = new javax.swing.JTextField();
         ButtonImage = new javax.swing.JButton();
+        Apagars = new javax.swing.JButton();
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         jLabel4.setText("Cod. de Barras:");
@@ -169,6 +170,13 @@ public class CRUDProdutos extends javax.swing.JFrame {
             }
         });
 
+        Apagars.setText("Apagar");
+        Apagars.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ApagarsActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -182,16 +190,20 @@ public class CRUDProdutos extends javax.swing.JFrame {
                                 .addComponent(txtNomeProduto, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addComponent(txtCodBarras, javax.swing.GroupLayout.Alignment.LEADING)
                                 .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
-                                        .addComponent(txtDataVencimento, javax.swing.GroupLayout.Alignment.LEADING))
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addGroup(layout.createSequentialGroup()
+                                            .addComponent(ButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGap(7, 7, 7)
+                                            .addComponent(Apagars))
+                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 160, Short.MAX_VALUE)
+                                            .addComponent(txtDataVencimento, javax.swing.GroupLayout.Alignment.LEADING)))
                                     .addGap(18, 18, 18)
                                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(txtPreco, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel6))))
                             .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(ButtonNew, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel3))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -246,7 +258,9 @@ public class CRUDProdutos extends javax.swing.JFrame {
                     .addComponent(ButtonNew1)
                     .addComponent(txtPreco1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(ButtonNew)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(ButtonNew)
+                    .addComponent(Apagars))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -374,6 +388,17 @@ public class CRUDProdutos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_txtPreco1ActionPerformed
 
+    private void ApagarsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ApagarsActionPerformed
+        // TODO add your handling code here:
+        ProdutosDAOs.DeletaRegistroProdutos(Produtos.getId());
+        ProdutosDAOs.LerTabelaProdutos();
+        habilitarDesabilitaCampos(false);
+        jTable();
+        ButtonImage.setIcon(new ImageIcon("src\\main\\java\\Image\\cancel_32x32.png"));
+        SetCampoImage();
+        limparCampos();
+    }//GEN-LAST:event_ApagarsActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -418,6 +443,7 @@ public class CRUDProdutos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Apagars;
     private static javax.swing.JButton ButtonImage;
     private javax.swing.JButton ButtonNew;
     private javax.swing.JButton ButtonNew1;

@@ -17,7 +17,13 @@ public class MenuGerentes extends javax.swing.JFrame {
     public MenuGerentes() {
         initComponents();
     }
-
+    public void PClose(){
+        this.dispose();
+        //DO_NOTHING_ON_CLOSE, HIDE_ON_CLOSE, DISPOSE_ON_CLOSE, or EXIT_ON_CLOSE
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+        this.setVisible(false);
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -183,8 +189,9 @@ public class MenuGerentes extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new MenuGerentes().setVisible(true);
+                //new MenuGerentes().setVisible(true);
             }
         });
     }
